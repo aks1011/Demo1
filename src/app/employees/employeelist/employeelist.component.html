@@ -10,7 +10,7 @@
             <td><a class="text-primary" (click)="onEdit(emp)">{{emp.empCode}}</a> - {{emp.fullName}}</td>
             <td>{{emp.position}}</td>
             <td>{{emp.mobile}}</td>
-            <td> <a class="btn text-danger"><i class="fa fa-trash"></i></a> </td>
+            <td> <a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fa fa-trash"></i></a> </td>
         </tr>
     </tbody>
 </table>

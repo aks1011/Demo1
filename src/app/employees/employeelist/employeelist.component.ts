@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { Employee } from 'src/app/shared/employee.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employeelist',
@@ -10,7 +11,7 @@ import { Employee } from 'src/app/shared/employee.model';
 export class EmployeelistComponent implements OnInit {
 
   list: Employee[];
-  constructor(private service: EmployeeService) { }
+  constructor(private service: EmployeeService, private toastr:ToastrService) { }
 
   ngOnInit() {
     this.service.getEmployees().subscribe(actionArray => {
@@ -24,7 +25,11 @@ export class EmployeelistComponent implements OnInit {
   }
 
   onEdit(emp: Employee) {
-    this.service.formData = emp;
+    this.service.formData = Object.assign({},emp);
   }
 
+  onDelete(id){
+    this.service.deleteEmployee(id);
+    this.toastr.warning('Deleted successfully','Register')
+  }
 }

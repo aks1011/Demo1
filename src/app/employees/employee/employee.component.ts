@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
+
+import { FormGroup, FormBuilder, Validator } from "@angular/forms";
 
 @Component({
   selector: 'app-employee',
@@ -11,10 +13,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private service: EmployeeService, private firestore: AngularFirestore, private toastr: ToastrService) { }
+  taskForm: FormGroup
+  constructor(private fb: FormBuilder, private service: EmployeeService, private firestore: AngularFirestore, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.resetForm();
+
+    this.taskForm = this.fb.group({
+      taskTitle: ['', [Validators.required]],
+      taskDesc: [''],
+      allocatedTo: [''],
+      estimatedTime: ['']
+    })
+
   }
 
   resetForm(form?: NgForm) {
@@ -30,8 +41,15 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    let data = form.value
-    this.firestore.collection('Sprints').add(data);
+    let data = Object.assign({}, form.value);
+    delete data.id;
+    if (form.value.id == null) {
+      this.firestore.collection('Sprints').add(data);
+    }
+    else {
+      this.firestore.doc('Sprints/' + form.value.id).update(data);
+    }
+
     this.resetForm(form);
     this.toastr.success('Submitted successfully', 'Register');
   }

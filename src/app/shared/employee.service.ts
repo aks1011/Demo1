@@ -13,4 +13,8 @@ export class EmployeeService {
   getEmployees(){
     return this.firestore.collection('Sprints').snapshotChanges();
   }
+
+  deleteEmployee(id){
+    this.firestore.collection('Sprints').doc(id).delete();
+  }
 }
