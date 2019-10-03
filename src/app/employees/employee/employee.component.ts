@@ -45,13 +45,13 @@ export class EmployeeComponent implements OnInit {
     delete data.id;
     if (form.value.id == null) {
       this.firestore.collection('Sprints').add(data);
+      this.toastr.success('Submitted successfully', 'Register');
     }
     else {
       this.firestore.doc('Sprints/' + form.value.id).update(data);
+      this.toastr.info('Edited successfully', 'Register');
     }
-
     this.resetForm(form);
-    this.toastr.success('Submitted successfully', 'Register');
   }
 
 }
