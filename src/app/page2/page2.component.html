@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-6 activity">
+        <mat-list>
+            <h3 mat-subheader>Activity</h3>
+            <mat-list-item *ngFor="let hisaab of hisaabList">
+                <h3 matLine> {{hisaab.title}} </h3>
+                <p matLine>
+                    <span> You {{hisaab.status}} {{hisaab.amount}} </span>
+                    <span> {{hisaab.time}} </span>
+                </p>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    <div class="col-6 add-expense">
+        <h3 mat-subheader>Add expense</h3>
+
+        <div class="row col-12">
+            <mat-form-field appearance="outline" class="example-chip-list">
+                <mat-label floatLabel='always'>With you and </mat-label>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip *ngFor="let friend of friendList" color="accent" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(friend)">
+                        {{friend}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder='Enter name, email or phone#' [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+        <div class="row col-12">
+            <mat-form-field appearance="outline">
+                <mat-label floatLabel='always'>Description</mat-label>
+                <input matInput placeholder="Enter a description">
+            </mat-form-field>
+        </div>
+        <div class="row col-12">
+            <mat-form-field appearance="outline">
+                <mat-label floatLabel='always'>Amount</mat-label>
+                <input matInput placeholder="0.00" type="number" class="example-right-align">
+            </mat-form-field>
+        </div>
+        <div class="row col-12 splitBetween">
+
+            <div class="col-2">
+                <span>Paid by </span>
+            </div>
+            <div class="col-3">
+                <mat-form-field>
+                    <mat-select placeholder="" [(value)]="selected">
+                        <mat-option name="You" value="You">You</mat-option>
+                        <mat-option *ngFor="let friend of friendList" [value]="friend">{{friend}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <span> and split </span>
+            </div>
+            <div class="col-4">
+                <mat-form-field>
+                    <mat-select placeholder="Equally" [formControl]="toppings" multiple (focus)="focusFunction()">
+                        <mat-select-trigger>
+                            {{toppings.value ? toppings.value[0] : ''}}
+                            <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                                (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let friend of friendList" [value]="friend">{{friend}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div><br>
+        <div class="row col-12 offset-9">
+                <button mat-button>Reset</button>&nbsp;
+                <button mat-raised-button>Save</button>
+        </div><br><br>
+    </div>
+</div>
