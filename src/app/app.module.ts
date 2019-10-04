@@ -23,6 +23,9 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeComponent } from './employees/employee/employee.component';
 import { EmployeelistComponent } from './employees/employeelist/employeelist.component';
 import { EmployeeService } from './shared/employee.service';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './tasks/task/task.component';
+import { TasklistComponent } from './tasks/tasklist/tasklist.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { EmployeeService } from './shared/employee.service';
     AnimationDemoComponent,
     EmployeesComponent,
     EmployeeComponent,
-    EmployeelistComponent
+    EmployeelistComponent,
+    TasksComponent,
+    TaskComponent,
+    TasklistComponent
   ],
   imports: [
     BrowserModule,

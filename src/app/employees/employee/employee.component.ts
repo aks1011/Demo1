@@ -18,14 +18,6 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
-
-    this.taskForm = this.fb.group({
-      taskTitle: ['', [Validators.required]],
-      taskDesc: [''],
-      allocatedTo: [''],
-      estimatedTime: ['']
-    })
-
   }
 
   resetForm(form?: NgForm) {

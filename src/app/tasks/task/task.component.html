@@ -1,0 +1,57 @@
+<form #form="taskForm" (ngSubmit)="onSubmitTaskForm(taskForm)" class="form-horizontal">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Task</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="form-group"
+                [ngClass]="{'has-error':taskForm.get('taskTitle').errors &&(taskForm.get('taskTitle').touched || taskForm.get('taskTitle').dirty)}">
+                <div class="col-sm-12">
+                    <input type="text" placeholder="Title" id="taskTitle" formControlName="taskTitle"
+                        class="form-control">
+                    <span class="help-block"
+                        *ngIf="taskForm.get('taskTitle').errors &&(taskForm.get('taskTitle').touched || taskForm.get('taskTitle').dirty)">
+                        <span *ngIf="taskForm.get('taskTitle').errors.required">Title is required</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <textarea type="text" placeholder="Description" rows="3" id="taskDesc" formControlName="taskDesc"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <select type="text" placeholder="Allocated to" id="allocatedTo" formControlName="allocatedTo"
+                        class="form-control">
+                        <option>Alok</option>
+                        <option>Amit</option>
+                        <option>Ankita</option>
+                        <option>Devendra</option>
+                        <option>Sumeet</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <input type="number" placeholder="Estimated time" id="estimatedTime" formControlName="estimatedTime"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
