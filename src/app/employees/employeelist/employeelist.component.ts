@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EmployeelistComponent implements OnInit {
 
   list: Employee[];
-  constructor(private service: EmployeeService, private toastr:ToastrService) { }
+  constructor(private service: EmployeeService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.service.getEmployees().subscribe(actionArray => {
@@ -19,17 +19,17 @@ export class EmployeelistComponent implements OnInit {
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
-        } as Employee
-      })
+        } as Employee;
+      });
     });
   }
 
   onEdit(emp: Employee) {
-    this.service.formData = Object.assign({},emp);
+    this.service.formData = Object.assign({}, emp);
   }
 
-  onDelete(id){
+  onDelete(id) {
     this.service.deleteEmployee(id);
-    this.toastr.warning('Deleted successfully','Register')
+    this.toastr.warning('Deleted successfully', 'Register');
   }
 }

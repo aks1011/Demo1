@@ -20,23 +20,20 @@ export class TaskComponent implements OnInit {
       taskDesc: [''],
       allocatedTo: [''],
       estimatedTime: ['']
-    })
-
-    
+    });
   }
 
   onSubmitTaskForm(form) {
-    let data = Object.assign({}, form.value);
+    const data = Object.assign({}, form.value);
     delete data.id;
     if (form.value.id == null) {
       this.firestore.collection('Tasks').add(data);
       this.toastr.success('Task added successfully', 'Sprint planner');
-    }
-    else {
+    } else {
       this.firestore.doc('Tasks/' + form.value.id).update(data);
       this.toastr.info('Task edited successfully', 'Sprint planner');
     }
-    //this.resetForm(form);
+    // this.resetForm(form);
   }
 
 
@@ -50,7 +47,7 @@ export class TaskComponent implements OnInit {
   //     empCode: '',
   //     mobile: '',
   //   }
-  //}
+  // }
 
 
 }
