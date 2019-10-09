@@ -33,15 +33,13 @@
         </mat-card-actions>
     </mat-card>
 </div> -->
-<div class="container">
-    <div class="card" style="width: 35rem; margin: 5px;" *ngFor="let task of tasks">
-        <div class="card-body">
-            <h5 class="card-title">{{task.taskTitle | titlecase}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{task.taskId | uppercase }}</h6>
-            <hr>
-            <p class="card-text">{{task.taskDesc | titlecase}}</p>
-            <a href="#" class="card-link"><strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}</a>
-            <a href="#" class="card-link"><strong>Complexity : </strong>{{task.complexity | titlecase }}</a>
-        </div>
+<div class="card col-md-6" *ngFor="let task of tasks">
+    <div class="card-body">
+        <h5 class="card-title">{{task.taskTitle | titlecase}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{task.taskId | uppercase }}</h6>
+        <hr>
+        <p class="card-text">{{task.taskDesc | titlecase}}</p>
+        <a href="#" class="card-link"><strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}</a>
+        <a href="#" class="card-link"><strong>Complexity : </strong>{{task.complexity | titlecase }}</a>
     </div>
 </div>
