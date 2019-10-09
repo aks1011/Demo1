@@ -1,24 +1,52 @@
 <h1 class="display-4">CREATE TASK</h1>
-<form #taskForm="ngForm" autocomplete="off" (submit)="onSubmit(taskForm)">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.taskForm.id" class="form-control">
+<form #taskForm="ngForm" autocomplete="off" (submit)="onSubmitTaskForm(taskForm)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.taskData.id" class="form-control">
+    <input type="hidden" name="taskId" #taskId="ngModel" [(ngModel)]="service.taskData.taskId" class="form-control">
+    <input type="hidden" name="createdBy" #createdBy="ngModel" [(ngModel)]="service.taskData.createdBy"
+        class="form-control">
+    <input type="hidden" name="createdOn" #createdOn="ngModel" [(ngModel)]="service.taskData.createdOn"
+        class="form-control">
+    <input type="hidden" name="status" #status="ngModel" [(ngModel)]="service.taskData.status" class="form-control">
+
     <div class="form-group">
-        <input name="taskTitle" placeholder="Title" #taskTitle="ngModel" [(ngModel)]="service.taskForm.taskTitle"
-            class="form-control">
+        <label for="allocatedTo">Title</label>
+        <input name="taskTitle" #taskTitle="ngModel" [(ngModel)]="service.taskData.taskTitle" class="form-control">
     </div>
     <div class="form-group">
-        <input name="taskDesc" placeholder="Description" #taskDesc="ngModel" [(ngModel)]="service.taskForm.taskDesc"
-            class="form-control">
+        <label for="allocatedTo">Description</label>
+        <textarea name="taskDesc" rows="5" #taskDesc="ngModel" [(ngModel)]="service.taskData.taskDesc"
+            class="form-control"></textarea>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
-            <input name="allocatedTo" placeholder="Allocated to" #allocatedTo="ngModel" [(ngModel)]="service.taskForm.allocatedTo"
+        <div class="form-group col-md-3">
+            <div class="btn-group btn-group-justified">
+                <label for="allocatedTo">Allocated to</label>
+                <select id="allocatedTo" name="allocatedTo" #allocatedTo="ngModel"
+                    [(ngModel)]="service.taskData.allocatedTo" class="form-control">
+                    <option value="alok">Alok</option>
+                    <option value="sumeet">Sumeet</option>
+                    <option value="amit">Amit</option>
+                    <option value="ekta">Ekta</option>
+                    <option value="rohan">Rohan</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="complexity">Complexity</label>
+            <select id="complexity" name="complexity" #complexity="ngModel" [(ngModel)]="service.taskData.complexity"
                 class="form-control">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
         </div>
         <div class="form-group col-md-6">
-            <input name="estimatedTime" placeholder="Estimated time" #estimatedTime="ngModel" [(ngModel)]="service.taskForm.estimatedTime"
-                class="form-control">
+            <label for="allocatedTo">Estimated time</label>
+            <input type="number" name="estimatedTime" #estimatedTime="ngModel"
+                [(ngModel)]="service.taskData.estimatedTime" class="form-control">
         </div>
     </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-lg btn-block btn-info">Submit</button>
     </div>

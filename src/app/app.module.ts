@@ -26,6 +26,7 @@ import { EmployeeService } from './shared/employee.service';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { TasklistComponent } from './tasks/tasklist/tasklist.component';
+import { TaskService } from './tasks/shared/task.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { TasklistComponent } from './tasks/tasklist/tasklist.component';
     AngularFirestoreModule,
     ToastrModule.forRoot()
   ],
-  providers: [DateServiceService, EmployeeService],
+  providers: [DateServiceService, EmployeeService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

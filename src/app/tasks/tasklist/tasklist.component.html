@@ -1,1 +1,47 @@
-<p>tasklist works!</p>
+<!-- <table class="table table-hover">
+    <thead>
+        <th>Id</th>
+        <th>Task</th>
+        <th>Allocated to</th>
+        <th>Status</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td><a class="text-primary edit" (click)="onEdit(emp)">{{task.taskId | uppercase }}</a> </td>
+            <td>{{task.taskTitle | titlecase}}</td>
+            <td>{{task.allocatedTo | titlecase}}</td>
+            <td>{{task.status}}</td>
+            <td> <a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fa fa-trash"></i></a> </td>
+        </tr>
+    </tbody>
+</table> -->
+<!-- 
+<div class="container">
+    <mat-card class="example-card" *ngFor="let task of tasks">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{task.taskTitle | titlecase}}</mat-card-title>
+            <mat-card-subtitle>{{task.taskId | uppercase }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>{{task.taskDesc | titlecase}} </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>Allocated to : {{task.allocatedTo | titlecase }}</p>
+            <p>Complexity : {{task.complexity | titlecase }}</p>
+        </mat-card-actions>
+    </mat-card>
+</div> -->
+<div class="container">
+    <div class="card" style="width: 35rem; margin: 5px;" *ngFor="let task of tasks">
+        <div class="card-body">
+            <h5 class="card-title">{{task.taskTitle | titlecase}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{task.taskId | uppercase }}</h6>
+            <hr>
+            <p class="card-text">{{task.taskDesc | titlecase}}</p>
+            <a href="#" class="card-link"><strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}</a>
+            <a href="#" class="card-link"><strong>Complexity : </strong>{{task.complexity | titlecase }}</a>
+        </div>
+    </div>
+</div>
