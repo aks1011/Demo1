@@ -1,3 +1,43 @@
+<h1 class="display-4"><i class="ml-2 mr-2 fa fa-list-alt" aria-hidden="true"></i>TASK LIST</h1>
+<div class="card" *ngFor="let task of tasks">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-3 text-muted">
+            <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i> {{task.taskTitle | titlecase}}</strong>
+            <span style="float: right">
+                <strong>Created on : </strong>{{task.createdOn | titlecase }}
+            </span>
+        </h6>
+        <h6 class="card-subtitle mb-4 text-muted">
+            {{task.taskId | uppercase }}
+            <span style="float: right">
+                <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
+            </span>
+        </h6>
+        <h6 class="card-subtitle mb-3 text-muted">
+            <strong>Estimated time : </strong>
+            <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
+            <span style="float: right">
+                <strong>Complexity : </strong>
+                <span class="badge badge-info" *ngIf="task.complexity == 'low'"
+                    style="background-color: rgb(255, 172, 19)">
+                    {{task.complexity | titlecase }}
+                </span>
+
+                <span class="badge badge-info" *ngIf="task.complexity == 'medium'"
+                    style="background-color: rgb(47, 226, 24)">
+                    {{task.complexity | titlecase }}
+                </span>
+
+                <span class="badge badge-info" *ngIf="task.complexity == 'high'"
+                    style="background-color: rgb(255, 20, 20)">
+                    {{task.complexity | titlecase }}
+                </span>
+            </span>
+        </h6>
+        <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+    </div>
+</div>
+
 <!-- <table class="table table-hover">
     <thead>
         <th>Id</th>
@@ -33,13 +73,3 @@
         </mat-card-actions>
     </mat-card>
 </div> -->
-<div class="card col-md-6" *ngFor="let task of tasks">
-    <div class="card-body">
-        <h5 class="card-title">{{task.taskTitle | titlecase}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{task.taskId | uppercase }}</h6>
-        <hr>
-        <p class="card-text">{{task.taskDesc | titlecase}}</p>
-        <a href="#" class="card-link"><strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}</a>
-        <a href="#" class="card-link"><strong>Complexity : </strong>{{task.complexity | titlecase }}</a>
-    </div>
-</div>

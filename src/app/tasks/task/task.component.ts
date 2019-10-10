@@ -20,6 +20,19 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
+
+    this.taskForm = this.fb.group({
+      id: [],
+      taskId: [''],
+      taskTitle: ['', Validators.required],
+      taskDesc: ['', Validators.required],
+      allocatedTo: ['', Validators.required],
+      estimatedTime: ['', Validators.required],
+      createdBy: '',
+      createdOn: '',
+      status: '',
+      complexity: ['', Validators.required],
+    });
   }
 
   resetForm(form?: NgForm) {

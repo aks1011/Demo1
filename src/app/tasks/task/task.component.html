@@ -1,4 +1,4 @@
-<h1 class="display-4">CREATE TASK</h1>
+<h1 class="display-4"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
 <form #taskForm="ngForm" autocomplete="off" (submit)="onSubmitTaskForm(taskForm)">
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.taskData.id" class="form-control">
     <input type="hidden" name="taskId" #taskId="ngModel" [(ngModel)]="service.taskData.taskId" class="form-control">
@@ -10,7 +10,14 @@
 
     <div class="form-group">
         <label for="allocatedTo">Title</label>
-        <input name="taskTitle" #taskTitle="ngModel" [(ngModel)]="service.taskData.taskTitle" class="form-control">
+        <input name="taskTitle" required #taskTitle="ngModel" [(ngModel)]="service.taskData.taskTitle" class="form-control">
+
+        <div *ngIf="taskTitle.invalid && (taskTitle.dirty || taskTitle.touched)" class="alert alert-danger">
+            <div *ngIf="taskTitle.errors.required">
+                Title is required.
+            </div>
+        </div>
+
     </div>
     <div class="form-group">
         <label for="allocatedTo">Description</label>
@@ -18,20 +25,20 @@
             class="form-control"></textarea>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <div class="btn-group btn-group-justified">
                 <label for="allocatedTo">Allocated to</label>
                 <select id="allocatedTo" name="allocatedTo" #allocatedTo="ngModel"
                     [(ngModel)]="service.taskData.allocatedTo" class="form-control">
-                    <option value="alok">Alok</option>
-                    <option value="sumeet">Sumeet</option>
-                    <option value="amit">Amit</option>
-                    <option value="ekta">Ekta</option>
-                    <option value="rohan">Rohan</option>
+                    <option value="alok">3592 - Alok</option>
+                    <option value="sumeet">3214 - Sumeet</option>
+                    <option value="amit">2231 - Amit</option>
+                    <option value="ekta">6545 - Ekta</option>
+                    <option value="rohan">3245 - Rohan</option>
                 </select>
             </div>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="complexity">Complexity</label>
             <select id="complexity" name="complexity" #complexity="ngModel" [(ngModel)]="service.taskData.complexity"
                 class="form-control">
@@ -40,7 +47,7 @@
                 <option value="high">High</option>
             </select>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="allocatedTo">Estimated time</label>
             <input type="number" name="estimatedTime" #estimatedTime="ngModel"
                 [(ngModel)]="service.taskData.estimatedTime" class="form-control">
@@ -48,6 +55,6 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-block btn-info">Submit</button>
+        <button type="submit" class="btn btn-lg btn-block btn-info" [disabled]="!taskForm.valid">Submit</button>
     </div>
 </form>
