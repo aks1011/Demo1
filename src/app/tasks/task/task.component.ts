@@ -14,13 +14,11 @@ export class TaskComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private firestore: AngularFirestore,
-    private toastr: ToastrService,
-    private service: TaskService) { }
+              private firestore: AngularFirestore,
+              private toastr: ToastrService,
+              private service: TaskService) { }
 
   ngOnInit() {
-    this.resetForm();
-
     this.taskForm = this.fb.group({
       id: [],
       taskId: [''],
@@ -33,11 +31,13 @@ export class TaskComponent implements OnInit {
       status: '',
       complexity: ['', Validators.required],
     });
+    this.resetForm();
   }
 
   resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
+    if (form != null) {
+      this.resetForm();
+    }
     this.service.taskData = {
       id: null,
       taskId: '',
@@ -49,16 +49,16 @@ export class TaskComponent implements OnInit {
       createdOn: '',
       status: '',
       complexity: '',
-    }
+    };
   }
 
   onSubmitTaskForm(taskForm: NgForm) {
     const data = Object.assign({}, taskForm.value);
     delete data.id;
     data.taskId = this.service.createTaskId();
-    data.createdBy = "Alok";
+    data.createdBy = 'Alok';
     data.createdOn = new Date().toDateString();
-    data.status = "Todo";
+    data.status = 'Todo';
     if (taskForm.value.id == null) {
       this.firestore.collection('Tasks').add(data);
       this.toastr.success('Task added successfully', 'Sprint planner');
