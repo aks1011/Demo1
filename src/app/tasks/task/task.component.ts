@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '../shared/task.service';
@@ -14,15 +14,14 @@ export class TaskComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private firestore: AngularFirestore,
-              private toastr: ToastrService,
-              private service: TaskService) { }
+    private firestore: AngularFirestore,
+    private toastr: ToastrService,
+    private service: TaskService) {
 
-  ngOnInit() {
-    this.taskForm = this.fb.group({
-      id: [],
+    this.taskForm = fb.group({
+      id: [''],
       taskId: [''],
-      taskTitle: ['', Validators.required],
+      taskTitle: ['Alok', Validators.required, Validators.minLength(5)],
       taskDesc: ['', Validators.required],
       allocatedTo: ['', Validators.required],
       estimatedTime: ['', Validators.required],
@@ -31,15 +30,18 @@ export class TaskComponent implements OnInit {
       status: '',
       complexity: ['', Validators.required],
     });
-    this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
+  ngOnInit() {
+    //this.resetForm(this.taskForm);
+  }
+
+  resetForm(form) {
     if (form != null) {
-      this.resetForm();
+      this.resetForm(this.resetForm);
     }
     this.service.taskData = {
-      id: null,
+      id: '',
       taskId: '',
       taskTitle: '',
       taskDesc: '',
@@ -52,20 +54,20 @@ export class TaskComponent implements OnInit {
     };
   }
 
-  onSubmitTaskForm(taskForm: NgForm) {
-    const data = Object.assign({}, taskForm.value);
+  onSubmitTaskForm() {
+    const data = Object.assign({}, this.taskForm.value);
     delete data.id;
     data.taskId = this.service.createTaskId();
     data.createdBy = 'Alok';
     data.createdOn = new Date().toDateString();
     data.status = 'Todo';
-    if (taskForm.value.id == null) {
+    if (this.taskForm.value.id == null) {
       this.firestore.collection('Tasks').add(data);
       this.toastr.success('Task added successfully', 'Sprint planner');
     } else {
-      this.firestore.doc('Tasks/' + taskForm.value.id).update(data);
+      this.firestore.doc('Tasks/' + this.taskForm.value.id).update(data);
       this.toastr.info('Task edited successfully', 'Sprint planner');
     }
-    this.resetForm(taskForm);
+    this.resetForm(this.taskForm);
   }
 }

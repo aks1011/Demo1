@@ -1,16 +1,19 @@
-<p appTextChanger></p>
+<form [formGroup]="alokForm" (ngSubmit)="onClickSubmit()">
 
-<div>
-    <form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
-        <input type="text" class="fortextbox" name="emailid" placeholder="emailid" formControlName="emailid">
-        <br />
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Name" formControlName="name">
+    </div>
 
-        <input type="password" class="fortextbox" name="passwd" placeholder="passwd" formControlName="passwd">
-        <br />
+    <div class="form-group">
+        <input type="number" class="form-control" name="age" placeholder="Age" formControlName="age">
+    </div>
 
-        <input type="submit" class="forsubmit" value="Log In">
-    </form>
-</div>
-<p>
-    Email entered is : {{emailid}}
-</p>
+    <div class="form-group">
+        <input type="number" class="form-control" name="mobile" placeholder="Mobile" formControlName="mobile">
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-info" value="Submit">
+    </div>
+
+</form>
