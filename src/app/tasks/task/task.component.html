@@ -3,7 +3,8 @@
         <div class="col-3 align-self-start">
         </div>
         <div class="col align-self-center task-form">
-            <h1 class="display-4"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
+            <h1 class="display-4 text-center"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
+            <hr>
             <form [formGroup]="taskForm" autocomplete="off" (ngSubmit)="onSubmitTaskForm()">
 
                 <input type="hidden" formControlName="id" name="id" class="form-control">

@@ -1,9 +1,14 @@
-<h1 class="display-4"><i class="ml-2 mr-2 fa fa-list-alt" aria-hidden="true"></i>TASK LIST</h1>
-<div cdkDropListGroup>
-    <div class="example-container">
+<h1 class="display-4 text-center">
+    <i class="ml-2 mr-2 fa fa-list-alt" aria-hidden="true"></i>
+    DASHBOARD
+    <!-- <p style="font-size: 1.5rem">TASK LIST</p> -->
+</h1>
+<hr style="margin: 0px 20px;">
+<div cdkDropListGroup style="margin-left: 20px;">
+    <div class="example-container col-4">
         <h2>ToDo</h2>
 
-        <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList id='todo' [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
             <div class="card" *ngFor="let task of todo" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">
@@ -46,10 +51,10 @@
         </div>
     </div>
 
-    <div class="example-container">
+    <div class="example-container col-4">
         <h2>In Progress</h2>
 
-        <div cdkDropList [cdkDropListData]="inprogress" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList id=inprogress [cdkDropListData]="inprogress" class="example-list" (cdkDropListDropped)="drop($event)">
             <div class="card" *ngFor="let task of inprogress" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">
@@ -92,10 +97,10 @@
         </div>
     </div>
 
-    <div class="example-container">
+    <div class="example-container col-4">
         <h2>Done</h2>
 
-        <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList id="done" [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
             <div class="card" *ngFor="let task of done" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">

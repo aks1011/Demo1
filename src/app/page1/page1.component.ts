@@ -18,7 +18,7 @@ export class Page1Component implements OnInit {
 
       name: ['', Validators.required],
       age: ['', Validators.compose([Validators.required, Validators.min(16), Validators.max(65)])],
-      mobile: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]{10}$")])]
+      mobile: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])]
 
     });
 

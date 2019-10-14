@@ -7,6 +7,7 @@ import { TaskComponent } from './tasks/task/task.component';
 import { TasklistComponent } from './tasks/tasklist/tasklist.component';
 
 const routes: Routes = [
+  { path: '', component: TasklistComponent },
   { path: 'animation', component: AnimationDemoComponent },
   { path: 'addtask', component: TaskComponent },
   { path: 'dashboard', component: TasklistComponent }

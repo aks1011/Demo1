@@ -34,13 +34,13 @@ export class TasklistComponent implements OnInit {
     this.inprogress = [];
     this.done = [];
     task.forEach(item => {
-      if (item.status.toLowerCase() == "todo") {
+      if (item.status.toLowerCase() === 'todo') {
         this.todo.push(item);
       }
-      if (item.status.toLowerCase() == "inprogress") {
+      if (item.status.toLowerCase() === 'inprogress') {
         this.inprogress.push(item);
       }
-      if (item.status.toLowerCase() == "done") {
+      if (item.status.toLowerCase() === 'done') {
         this.done.push(item);
       }
     });
@@ -55,6 +55,18 @@ export class TasklistComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+
+      const itemMoved = event.container.data[event.currentIndex] as unknown as Task;
+      if (event.container.id === 'todo') {
+        itemMoved.status = 'inprogress';
+      }
+      if (event.container.id === 'inprogress') {
+        itemMoved.status = 'inprogress';
+      }
+      if (event.container.id === 'done') {
+        itemMoved.status = 'done';
+      }
+      this.service.updateTask(itemMoved);
     }
   }
 }
