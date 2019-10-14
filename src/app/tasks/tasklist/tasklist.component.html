@@ -1,75 +1,141 @@
 <h1 class="display-4"><i class="ml-2 mr-2 fa fa-list-alt" aria-hidden="true"></i>TASK LIST</h1>
-<div class="card" *ngFor="let task of tasks">
-    <div class="card-body">
-        <h6 class="card-subtitle mb-3 text-muted">
-            <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i> {{task.taskTitle | titlecase}}</strong>
-            <span style="float: right">
-                <strong>Created on : </strong>{{task.createdOn | titlecase }}
-            </span>
-        </h6>
-        <h6 class="card-subtitle mb-4 text-muted">
-            {{task.taskId | uppercase }}
-            <span style="float: right">
-                <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
-            </span>
-        </h6>
-        <h6 class="card-subtitle mb-3 text-muted">
-            <strong>Estimated time : </strong>
-            <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
-            <span style="float: right">
-                <strong>Complexity : </strong>
-                <span class="badge badge-info" *ngIf="task.complexity == 'low'"
-                    style="background-color: rgb(255, 172, 19)">
-                    {{task.complexity | titlecase }}
-                </span>
+<div cdkDropListGroup>
+    <div class="example-container">
+        <h2>ToDo</h2>
 
-                <span class="badge badge-info" *ngIf="task.complexity == 'medium'"
-                    style="background-color: rgb(47, 226, 24)">
-                    {{task.complexity | titlecase }}
-                </span>
+        <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="card" *ngFor="let task of todo" cdkDrag>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            {{task.taskTitle | titlecase}}</strong>
+                        <span style="float: right">
+                            <strong>Created on : </strong>{{task.createdOn | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-4 text-muted">
+                        {{task.taskId | uppercase }}
+                        <span style="float: right">
+                            <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong>Estimated time : </strong>
+                        <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
+                        <span style="float: right">
+                            <strong>Complexity : </strong>
+                            <span class="badge badge-info" *ngIf="task.complexity == 'low'"
+                                style="background-color: rgb(255, 172, 19)">
+                                {{task.complexity | titlecase }}
+                            </span>
 
-                <span class="badge badge-info" *ngIf="task.complexity == 'high'"
-                    style="background-color: rgb(255, 20, 20)">
-                    {{task.complexity | titlecase }}
-                </span>
-            </span>
-        </h6>
-        <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                            <span class="badge badge-info" *ngIf="task.complexity == 'medium'"
+                                style="background-color: rgb(47, 226, 24)">
+                                {{task.complexity | titlecase }}
+                            </span>
+
+                            <span class="badge badge-info" *ngIf="task.complexity == 'high'"
+                                style="background-color: rgb(255, 20, 20)">
+                                {{task.complexity | titlecase }}
+                            </span>
+                        </span>
+                    </h6>
+                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <h2>In Progress</h2>
+
+        <div cdkDropList [cdkDropListData]="inprogress" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="card" *ngFor="let task of inprogress" cdkDrag>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            {{task.taskTitle | titlecase}}</strong>
+                        <span style="float: right">
+                            <strong>Created on : </strong>{{task.createdOn | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-4 text-muted">
+                        {{task.taskId | uppercase }}
+                        <span style="float: right">
+                            <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong>Estimated time : </strong>
+                        <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
+                        <span style="float: right">
+                            <strong>Complexity : </strong>
+                            <span class="badge badge-info" *ngIf="task.complexity == 'low'"
+                                style="background-color: rgb(255, 172, 19)">
+                                {{task.complexity | titlecase }}
+                            </span>
+
+                            <span class="badge badge-info" *ngIf="task.complexity == 'medium'"
+                                style="background-color: rgb(47, 226, 24)">
+                                {{task.complexity | titlecase }}
+                            </span>
+
+                            <span class="badge badge-info" *ngIf="task.complexity == 'high'"
+                                style="background-color: rgb(255, 20, 20)">
+                                {{task.complexity | titlecase }}
+                            </span>
+                        </span>
+                    </h6>
+                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <h2>Done</h2>
+
+        <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="card" *ngFor="let task of done" cdkDrag>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            {{task.taskTitle | titlecase}}</strong>
+                        <span style="float: right">
+                            <strong>Created on : </strong>{{task.createdOn | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-4 text-muted">
+                        {{task.taskId | uppercase }}
+                        <span style="float: right">
+                            <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
+                        </span>
+                    </h6>
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <strong>Estimated time : </strong>
+                        <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
+                        <span style="float: right">
+                            <strong>Complexity : </strong>
+                            <span class="badge badge-info" *ngIf="task.complexity == 'low'"
+                                style="background-color: rgb(255, 172, 19)">
+                                {{task.complexity | titlecase }}
+                            </span>
+
+                            <span class="badge badge-info" *ngIf="task.complexity == 'medium'"
+                                style="background-color: rgb(47, 226, 24)">
+                                {{task.complexity | titlecase }}
+                            </span>
+
+                            <span class="badge badge-info" *ngIf="task.complexity == 'high'"
+                                style="background-color: rgb(255, 20, 20)">
+                                {{task.complexity | titlecase }}
+                            </span>
+                        </span>
+                    </h6>
+                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-
-<!-- <table class="table table-hover">
-    <thead>
-        <th>Id</th>
-        <th>Task</th>
-        <th>Allocated to</th>
-        <th>Status</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let task of tasks">
-            <td><a class="text-primary edit" (click)="onEdit(emp)">{{task.taskId | uppercase }}</a> </td>
-            <td>{{task.taskTitle | titlecase}}</td>
-            <td>{{task.allocatedTo | titlecase}}</td>
-            <td>{{task.status}}</td>
-            <td> <a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fa fa-trash"></i></a> </td>
-        </tr>
-    </tbody>
-</table> -->
-<!-- 
-<div class="container">
-    <mat-card class="example-card" *ngFor="let task of tasks">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{task.taskTitle | titlecase}}</mat-card-title>
-            <mat-card-subtitle>{{task.taskId | uppercase }}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-            <p>{{task.taskDesc | titlecase}} </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <p>Allocated to : {{task.allocatedTo | titlecase }}</p>
-            <p>Complexity : {{task.complexity | titlecase }}</p>
-        </mat-card-actions>
-    </mat-card>
-</div> -->

@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { AnimationDemoComponent } from './animation-demo/animation-demo.component';
+import { TaskComponent } from './tasks/task/task.component';
+import { TasklistComponent } from './tasks/tasklist/tasklist.component';
 
 const routes: Routes = [
   { path: 'animation', component: AnimationDemoComponent },
-  { path: 'page1', component: Page1Component },
-  { path: 'page2', component: Page2Component }
+  { path: 'addtask', component: TaskComponent },
+  { path: 'dashboard', component: TasklistComponent }
 ];
 
 @NgModule({

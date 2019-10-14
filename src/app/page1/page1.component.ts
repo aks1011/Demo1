@@ -16,9 +16,9 @@ export class Page1Component implements OnInit {
 
     this.alokForm = this.fb.group({
 
-      name:['',Validators.required],
-      age:['',[Validators.minLength(1), Validators.maxLength(2)]],
-      mobile:['',[Validators.minLength(10), Validators.maxLength(10)]]
+      name: ['', Validators.required],
+      age: ['', Validators.compose([Validators.required, Validators.min(16), Validators.max(65)])],
+      mobile: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]{10}$")])]
 
     });
 
@@ -27,4 +27,8 @@ export class Page1Component implements OnInit {
   onClickSubmit() {
     console.log(this.alokForm.value);
   }
+
+  get name() { return this.alokForm.get('name'); }
+  get age() { return this.alokForm.get('age'); }
+  get mobile() { return this.alokForm.get('mobile'); }
 }

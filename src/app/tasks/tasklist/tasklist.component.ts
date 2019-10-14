@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
@@ -10,8 +11,10 @@ import { TaskService } from '../shared/task.service';
 export class TasklistComponent implements OnInit {
 
   tasks: Task[];
-
-  constructor(private service:TaskService) { }
+  todo: Task[];
+  inprogress: Task[];
+  done: Task[];
+  constructor(private service: TaskService) { }
 
   ngOnInit() {
     this.service.getTasks().subscribe(actionArray => {
@@ -21,7 +24,37 @@ export class TasklistComponent implements OnInit {
           ...item.payload.doc.data()
         } as Task;
       });
+      this.divideTasksBasedOnStatus(this.tasks);
     });
+
   }
 
+  divideTasksBasedOnStatus(task: Task[]) {
+    this.todo = [];
+    this.inprogress = [];
+    this.done = [];
+    task.forEach(item => {
+      if (item.status.toLowerCase() == "todo") {
+        this.todo.push(item);
+      }
+      if (item.status.toLowerCase() == "inprogress") {
+        this.inprogress.push(item);
+      }
+      if (item.status.toLowerCase() == "done") {
+        this.done.push(item);
+      }
+    });
+
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+  }
 }

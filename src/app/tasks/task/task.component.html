@@ -1,54 +1,106 @@
-<h1 class="display-4"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
-<form id="taskForm" [formGroup]="taskForm" autocomplete="off" (ngSubmit)="onSubmitTaskForm()">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.taskData.id" class="form-control">
-    <input type="hidden" name="taskId" #taskId="ngModel" [(ngModel)]="service.taskData.taskId" class="form-control">
-    <input type="hidden" name="createdBy" #createdBy="ngModel" [(ngModel)]="service.taskData.createdBy"
-        class="form-control">
-    <input type="hidden" name="createdOn" #createdOn="ngModel" [(ngModel)]="service.taskData.createdOn"
-        class="form-control">
-    <input type="hidden" name="status" #status="ngModel" [(ngModel)]="service.taskData.status" class="form-control">
+<div class="container">
+    <div class="row">
+        <div class="col-3 align-self-start">
+        </div>
+        <div class="col align-self-center task-form">
+            <h1 class="display-4"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
+            <form [formGroup]="taskForm" autocomplete="off" (ngSubmit)="onSubmitTaskForm()">
 
-    <div class="form-group"> 
-        <label for="taskTitle">Title</label>
-        <input formControlName="taskTitle" id="taskTitle" class="form-control">
-    </div> 
-    
-    <div class="form-group">
-        <label for="allocatedTo">Description</label>
-        <textarea name="taskDesc" rows="5" #taskDesc="ngModel" [(ngModel)]="service.taskData.taskDesc"
-            class="form-control"></textarea>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <div class="btn-group btn-group-justified">
-                <label for="allocatedTo">Allocated to</label>
-                <select id="allocatedTo" name="allocatedTo" #allocatedTo="ngModel"
-                    [(ngModel)]="service.taskData.allocatedTo" class="form-control">
-                    <option value="alok">3592 - Alok</option>
-                    <option value="sumeet">3214 - Sumeet</option>
-                    <option value="amit">2231 - Amit</option>
-                    <option value="ekta">6545 - Ekta</option>
-                    <option value="rohan">3245 - Rohan</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="complexity">Complexity</label>
-            <select id="complexity" name="complexity" #complexity="ngModel" [(ngModel)]="service.taskData.complexity"
-                class="form-control">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="allocatedTo">Estimated time</label>
-            <input type="number" name="estimatedTime" #estimatedTime="ngModel"
-                [(ngModel)]="service.taskData.estimatedTime" class="form-control">
-        </div>
-    </div>
+                <input type="hidden" formControlName="id" name="id" class="form-control">
+                <input type="hidden" formControlName="taskId" name="taskId" class="form-control">
+                <input type="hidden" formControlName="createdBy" name="createdBy" class="form-control">
+                <input type="hidden" formControlName="createdOn" name="createdOn" class="form-control">
+                <input type="hidden" formControlName="status" name="status" class="form-control">
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-block btn-info" [disabled]="!taskForm.valid">Submit</button>
+                <div class="form-group"
+                    [ngClass]="{'has-error':taskTitle.invalid && (taskTitle.dirty || taskTitle.touched)}">
+                    <label for="taskTitle">Title</label>
+                    <input formControlName="taskTitle" name="taskTitle" class="form-control">
+
+                    <div class="error-badge" *ngIf="taskTitle.invalid && (taskTitle.dirty || taskTitle.touched)">
+                        <div *ngIf="taskTitle.errors.required">
+                            <span>Title is required</span>
+                        </div>
+                        <div *ngIf="taskTitle.errors.minlength">
+                            <span>Min 10 characters</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group"
+                    [ngClass]="{'has-error':taskDesc.invalid && (taskDesc.dirty || taskDesc.touched)}">
+                    <label for="taskDesc">Description</label>
+                    <textarea name="taskDesc" rows="5" formControlName="taskDesc" class="form-control"></textarea>
+
+                    <div class="error-badge" *ngIf="taskDesc.invalid && (taskDesc.dirty || taskDesc.touched)">
+                        <div *ngIf="taskDesc.errors.required">
+                            <span>Title is required</span>
+                        </div>
+                        <div *ngIf="taskDesc.errors.minlength">
+                            <span>Min 25 characters</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-4"
+                        [ngClass]="{'has-error':allocatedTo.invalid && (allocatedTo.dirty || allocatedTo.touched)}">
+                        <div class="btn-group btn-group-justified">
+                            <label for="allocatedTo">Allocated to</label>
+                            <select name="allocatedTo" formControlName="allocatedTo" class="form-control">
+                                <option value="alok">3592 - Alok</option>
+                                <option value="sumeet">3214 - Sumeet</option>
+                                <option value="amit">2231 - Amit</option>
+                                <option value="ekta">6545 - Ekta</option>
+                                <option value="rohan">3245 - Rohan</option>
+                            </select>
+                        </div>
+                        <div *ngIf="allocatedTo.invalid && (allocatedTo.dirty || allocatedTo.touched)">
+                            <span class="error-badge">Select an option</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4"
+                        [ngClass]="{'has-error':complexity.invalid && (complexity.dirty || complexity.touched)}">
+                        <label for="complexity">Complexity</label>
+                        <select name="complexity" formControlName="complexity" class="form-control">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <div *ngIf="complexity.invalid && (complexity.dirty || complexity.touched)">
+                            <span class="error-badge">Select an option</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="estimatedTime">Estimated time</label>
+                        <input type="number" name="estimatedTime" formControlName="estimatedTime" class="form-control">
+
+                        <div class="error-badge"
+                            *ngIf="estimatedTime.invalid && (estimatedTime.dirty || estimatedTime.touched)">
+                            <div *ngIf="estimatedTime.errors.required">
+                                <span>Estimated time is required</span>
+                            </div>
+                            <div *ngIf="estimatedTime.errors.min">
+                                <span>Invalid time</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block btn-info"
+                        [ngClass]="{'btn-danger':!taskForm.valid}" [disabled]="!taskForm.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3 align-self-end">
+         </div>
     </div>
-</form>
+</div>

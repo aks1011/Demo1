@@ -19,12 +19,12 @@ export class TaskComponent implements OnInit {
     private service: TaskService) {
 
     this.taskForm = fb.group({
-      id: [''],
+      id: [null],
       taskId: [''],
-      taskTitle: ['Alok', Validators.required, Validators.minLength(5)],
-      taskDesc: ['', Validators.required],
+      taskTitle: ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+      taskDesc: ['', Validators.compose([Validators.required, Validators.minLength(25)])],
       allocatedTo: ['', Validators.required],
-      estimatedTime: ['', Validators.required],
+      estimatedTime: ['', Validators.compose([Validators.required, Validators.min(1)])],
       createdBy: '',
       createdOn: '',
       status: '',
@@ -33,15 +33,15 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.resetForm(this.taskForm);
+    this.resetForm(this.taskForm);
   }
 
   resetForm(form) {
-    if (form != null) {
-      this.resetForm(this.resetForm);
+    if (form.id != null) {
+      this.resetForm(this.taskForm);
     }
     this.service.taskData = {
-      id: '',
+      id: null,
       taskId: '',
       taskTitle: '',
       taskDesc: '',
@@ -52,6 +52,8 @@ export class TaskComponent implements OnInit {
       status: '',
       complexity: '',
     };
+
+    this.taskForm.reset();
   }
 
   onSubmitTaskForm() {
@@ -70,4 +72,13 @@ export class TaskComponent implements OnInit {
     }
     this.resetForm(this.taskForm);
   }
+
+  get id() { return this.taskForm.get('id'); }
+  get taskId() { return this.taskForm.get('taskId'); }
+  get taskTitle() { return this.taskForm.get('taskTitle'); }
+  get taskDesc() { return this.taskForm.get('taskDesc'); }
+  get allocatedTo() { return this.taskForm.get('allocatedTo'); }
+  get estimatedTime() { return this.taskForm.get('estimatedTime'); }
+  get complexity() { return this.taskForm.get('complexity'); }
+
 }
