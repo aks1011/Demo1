@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
+import { fade } from '../shared/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.component.html',
-  styleUrls: ['./tasklist.component.scss']
+  styleUrls: ['./tasklist.component.scss'],
+  animations: [fade]
 })
 export class TasklistComponent implements OnInit {
 
@@ -14,7 +17,7 @@ export class TasklistComponent implements OnInit {
   todo: Task[];
   inprogress: Task[];
   done: Task[];
-  constructor(private service: TaskService) { }
+  constructor(private service: TaskService, private toastr:ToastrService) { }
 
   ngOnInit() {
     this.service.getTasks().subscribe(actionArray => {
@@ -68,5 +71,11 @@ export class TasklistComponent implements OnInit {
       }
       this.service.updateTask(itemMoved);
     }
+  }
+
+  deleteTask(id){
+    this.service.deleteTask(id);
+    this.toastr.error('Task deleted successfully', 'Sprint planner');
+
   }
 }

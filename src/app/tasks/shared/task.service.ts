@@ -29,4 +29,7 @@ export class TaskService {
     this.firestore.doc('Tasks/' + item.id).update(item);
   }
 
+  deleteTask(id){
+    this.firestore.collection('Tasks').doc(id).delete();
+  }
 }

@@ -1,14 +1,14 @@
 <h1 class="display-4 text-center">
     <i class="ml-2 mr-2 fa fa-list-alt" aria-hidden="true"></i>
     DASHBOARD
-    <!-- <p style="font-size: 1.5rem">TASK LIST</p> -->
 </h1>
 <hr style="margin: 0px 20px;">
 <div cdkDropListGroup style="margin-left: 20px;">
+
     <div class="example-container col-4">
         <h2>ToDo</h2>
-
-        <div cdkDropList id='todo' [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList @fade id='todo' [cdkDropListData]="todo" class="example-list"
+            (cdkDropListDropped)="drop($event)">
             <div class="card" *ngFor="let task of todo" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">
@@ -24,7 +24,7 @@
                             <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
                         </span>
                     </h6>
-                    <h6 class="card-subtitle mb-3 text-muted">
+                    <h6 class="card-subtitle mb-4 text-muted">
                         <strong>Estimated time : </strong>
                         <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
                         <span style="float: right">
@@ -45,7 +45,17 @@
                             </span>
                         </span>
                     </h6>
-                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                    <h6 class="card-subtitle text-muted">
+                        <div class="row">
+                            <div class="col-12"> <strong>Description : </strong>{{task.taskDesc}}
+                            </div>
+                            <!-- <div class="col-1"> <span style="float: right">
+                                            <span class="text-danger btn-delete-task"><i class="fa fa-trash"
+                                                    aria-hidden="true"></i></span>
+                                        </span>
+                                    </div> -->
+                        </div>
+                    </h6>
                 </div>
             </div>
         </div>
@@ -53,8 +63,8 @@
 
     <div class="example-container col-4">
         <h2>In Progress</h2>
-
-        <div cdkDropList id=inprogress [cdkDropListData]="inprogress" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList @fade id=inprogress [cdkDropListData]="inprogress" class="example-list"
+            (cdkDropListDropped)="drop($event)">
             <div class="card" *ngFor="let task of inprogress" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">
@@ -70,7 +80,7 @@
                             <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
                         </span>
                     </h6>
-                    <h6 class="card-subtitle mb-3 text-muted">
+                    <h6 class="card-subtitle mb-4 text-muted">
                         <strong>Estimated time : </strong>
                         <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
                         <span style="float: right">
@@ -91,7 +101,17 @@
                             </span>
                         </span>
                     </h6>
-                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                    <h6 class="card-subtitle text-muted">
+                        <div class="row">
+                            <div class="col-12"> <strong>Description : </strong>{{task.taskDesc}}
+                            </div>
+                            <!-- <div class="col-1"> <span style="float: right">
+                                        <span class="text-danger btn-delete-task"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></span>
+                                    </span>
+                                </div> -->
+                        </div>
+                    </h6>
                 </div>
             </div>
         </div>
@@ -100,8 +120,9 @@
     <div class="example-container col-4">
         <h2>Done</h2>
 
-        <div cdkDropList id="done" [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="card" *ngFor="let task of done" cdkDrag>
+        <div cdkDropList @fade id="done" [cdkDropListData]="done" class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="card card-done" *ngFor="let task of done" cdkDrag>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">
                         <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i>
@@ -116,7 +137,7 @@
                             <strong>Allocated to : </strong>{{task.allocatedTo | titlecase }}
                         </span>
                     </h6>
-                    <h6 class="card-subtitle mb-3 text-muted">
+                    <h6 class="card-subtitle mb-4 text-muted">
                         <strong>Estimated time : </strong>
                         <span class="badge badge-info" style="background-color: #17a2b8">{{task.estimatedTime}}</span>
                         <span style="float: right">
@@ -137,10 +158,18 @@
                             </span>
                         </span>
                     </h6>
-                    <p class="card-text text-muted"><strong>Description : </strong>{{task.taskDesc}}</p>
+                    <h6 class="card-subtitle text-muted" style="display: flex;">
+                        <div class="done-desc">
+                            <strong>Description : </strong>
+                            {{task.taskDesc}}
+                        </div>
+                        <div class="text-danger btn-delete-task" (click)="deleteTask(task.id)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </div>
+                    </h6>
                 </div>
             </div>
         </div>
-
     </div>
+
 </div>

@@ -3,16 +3,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '../shared/task.service';
+import { slidein } from '../shared/animations';
+import { Task } from '../shared/task.model';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  animations: [slidein]
 })
 export class TaskComponent implements OnInit {
 
   taskForm: FormGroup;
-
+  showTaskInfoSlider: boolean;
+  addedTask: Task;
   constructor(private fb: FormBuilder,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
@@ -60,12 +64,16 @@ export class TaskComponent implements OnInit {
     const data = Object.assign({}, this.taskForm.value);
     delete data.id;
     data.taskId = this.service.createTaskId();
-    data.createdBy = 'Alok';
+    data.createdBy = 'Alok Sharna';
     data.createdOn = new Date().toDateString();
     data.status = 'Todo';
+    this.addedTask = new Task();
     if (this.taskForm.value.id == null) {
       this.firestore.collection('Tasks').add(data);
       this.toastr.success('Task added successfully', 'Sprint planner');
+      this.addedTask = data;
+      this.showTaskInfoSlider = true;
+      setTimeout(() => { this.showTaskInfoSlider = false; }, 10000);
     } else {
       this.firestore.doc('Tasks/' + this.taskForm.value.id).update(data);
       this.toastr.info('Task edited successfully', 'Sprint planner');
@@ -73,6 +81,9 @@ export class TaskComponent implements OnInit {
     this.resetForm(this.taskForm);
   }
 
+  closeTaskInfoSlider() {
+    this.showTaskInfoSlider = false;
+  }
   get id() { return this.taskForm.get('id'); }
   get taskId() { return this.taskForm.get('taskId'); }
   get taskTitle() { return this.taskForm.get('taskTitle'); }

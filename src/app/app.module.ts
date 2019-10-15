@@ -23,7 +23,7 @@ import { TaskService } from './tasks/shared/task.service';
     AppComponent,
     TasksComponent,
     TaskComponent,
-    TasklistComponent
+    TasklistComponent,
   ],
   imports: [
     BrowserModule,

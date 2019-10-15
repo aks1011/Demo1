@@ -1,9 +1,26 @@
 <div class="container">
     <div class="row">
         <div class="col-3 align-self-start">
+            <div @slidein *ngIf="showTaskInfoSlider" class="alert alert-info add-task-info-slider">
+                <h2 class="text-center">Task Details</h2>
+                <button type="button" class="close add-task-info-slider-close" (click)="closeTaskInfoSlider();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr>
+                <h2>{{addedTask.taskId | uppercase}}</h2>
+                <p><strong>Title : </strong>{{addedTask.taskTitle | titlecase}}</p>
+                <p><strong>Description : </strong>{{addedTask.taskDesc}}</p>
+                <p><strong>Created by : </strong>{{addedTask.createdBy | titlecase}}</p>
+                <p><strong>Created on : </strong>{{addedTask.createdOn}}</p>
+                <p><strong>Status : </strong>{{addedTask.taskId | uppercase}}</p>
+                <p><strong>Allocated to : </strong>{{addedTask.allocatedTo | titlecase}}</p>
+                <p><strong>Estimated time : </strong>{{addedTask.estimatedTime}}</p>
+                <p><strong>Complexity : </strong>{{addedTask.complexity | titlecase}}</p>
+            </div>
         </div>
         <div class="col align-self-center task-form">
-            <h1 class="display-4 text-center"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE TASK</h1>
+            <h1 class="display-4 text-center"><i class="ml-2 mr-2 fa fa-pencil-square-o" aria-hidden="true"></i>CREATE
+                TASK</h1>
             <hr>
             <form [formGroup]="taskForm" autocomplete="off" (ngSubmit)="onSubmitTaskForm()">
 
@@ -98,10 +115,10 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-lg btn-block btn-info"
                         [ngClass]="{'btn-danger':!taskForm.valid}" [disabled]="!taskForm.valid">Submit</button>
-                </div>
+                    </div>
             </form>
         </div>
         <div class="col-3 align-self-end">
-         </div>
+        </div>
     </div>
 </div>
