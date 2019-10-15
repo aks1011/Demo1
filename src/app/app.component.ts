@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DateServiceService } from './date-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +6,11 @@ import { DateServiceService } from './date-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Demo1';
-  currentDateAndTime: any;
 
-  constructor(private dateService: DateServiceService){
+  constructor(){
   }
 
   ngOnInit() {
-    this.currentDateAndTime = this.dateService.showCurrentDate();
   }
 
 }

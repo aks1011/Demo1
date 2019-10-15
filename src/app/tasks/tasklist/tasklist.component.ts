@@ -58,7 +58,7 @@ export class TasklistComponent implements OnInit {
 
       const itemMoved = event.container.data[event.currentIndex] as unknown as Task;
       if (event.container.id === 'todo') {
-        itemMoved.status = 'inprogress';
+        itemMoved.status = 'todo';
       }
       if (event.container.id === 'inprogress') {
         itemMoved.status = 'inprogress';
